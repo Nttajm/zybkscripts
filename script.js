@@ -13,7 +13,9 @@ const x2Buttons = document.querySelectorAll('input[type="checkbox"]');
 let index2 = 0;
 function clickNextBox() {
   if (index2 < x2Buttons.length) {
-    x2Buttons[index2].click();
+    if (!x2Buttons[index2].checked) {
+      x2Buttons[index2].click();
+    }
     index2++;
     setTimeout(clickNextBox, 300);
   }
@@ -71,8 +73,8 @@ function doShortResponse() {
         const answer = thisCont.querySelector('span.forfeit-answer');
 
         // Click "Show answer" twice to reveal the answer
-        setTimeout(() => showAnswerButton && showAnswerButton.click(), 50);
-        setTimeout(() => showAnswerButton && showAnswerButton.click(), 100);
+        setTimeout(() => showAnswerButton && showAnswerButton.click(), 17); // 50/3 ≈ 17
+        setTimeout(() => showAnswerButton && showAnswerButton.click(), 34); // 100/3 ≈ 34
 
         // Wait for the answer to appear, then fill and check
         setTimeout(() => {
@@ -83,8 +85,19 @@ function doShortResponse() {
                 chkbtn && chkbtn.click();
             }
             index6++;
-            setTimeout(doShortResponse, 300);
-        }, 200);
+            setTimeout(doShortResponse, 100); // 300/3 = 100
+        }, 67); // 200/3 ≈ 67
     }
 }
 doShortResponse();
+
+
+function clickAllStartButtons() {
+  const starButtons = document.querySelectorAll('button[class*="star"]');
+  starButtons.forEach(btn => {
+    if (btn.textContent.toLowerCase().includes('start')) {
+      btn.click();
+    }
+  });
+}
+clickAllStartButtons();
